@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Earthquake Visualizer</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Global Earthquake Visualizer</h1>
+            <p class="subtitle">Explore recent seismic activity around the world. Data is updated every 5 minutes from USGS.</p>
+        </header>
+        
+        <div class="view-toggles">
+            <button class="view-toggle active" id="map-toggle">Map View</button>
+            <button class="view-toggle" id="list-toggle">List View</button>
+        </div>
+        
+        <div class="dashboard">
+            <div class="map-container" id="map-view">
+                <div id="map"></div>
+            </div>
+            
+            <div class="list-view" id="list-view">
+                <div class="list-view-header">
+                    <h2>Recent Earthquakes</h2>
+                    <span id="list-count">0 earthquakes</span>
+                </div>
+                
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Search by location...">
+                </div>
+                
+                <div class="sort-options">
+                    <button class="sort-btn active" data-sort="time">Time</button>
+                    <button class="sort-btn" data-sort="magnitude">Magnitude</button>
+                    <button class="sort-btn" data-sort="depth">Depth</button>
+                </div>
+                
+                <div id="list-items">
+                    <div class="loading">Loading earthquake data...</div>
+                </div>
+            </div>
+            
+            <div class="sidebar">
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <div class="stat-label">Total Earthquakes</div>
+                        <div class="stat-value" id="total-eq">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Largest Magnitude</div>
+                        <div class="stat-value" id="max-mag">0.0</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Last Updated</div>
+                        <div class="stat-value" id="last-updated">-</div>
+                    </div>
+                </div>
+                
+                <div class="controls">
+                    <div class="filter-title">Filter by Magnitude</div>
+                    <div class="slider-container">
+                        <div class="slider-label">
+                            <span>Min: <span id="min-mag-value">2.5</span></span>
+                            <span>Max: <span id="max-mag-value">10.0</span></span>
+                        </div>
+                        <input type="range" id="magnitude-slider" min="0" max="10" step="0.1" value="2.5">
+                    </div>
+                    
+                    <div class="filter-title">Filter by Depth (km)</div>
+                    <div class="slider-container">
+                        <div class="slider-label">
+                            <span>Min: <span id="min-depth-value">0</span></span>
+                            <span>Max: <span id="max-depth-value">700</span></span>
+                        </div>
+                        <input type="range" id="depth-slider" min="0" max="700" step="10" value="700">
+                    </div>
+                </div>
+                
+                <div class="earthquake-list">
+                    <h3 class="filter-title">Recent Earthquakes</h3>
+                    <div id="earthquake-items">
+                        <div class="loading">Loading earthquake data...</div>
+                    </div>
+                </div>
+                
+                <div class="legend">
+                    <div class="legend-title">Earthquake Magnitude</div>
+                    <div class="legend-item"><span class="legend-color" style="background:#4CAF50"></span> < 4.0 (Minor)</div>
+                    <div class="legend-item"><span class="legend-color" style="background:#FFEB3B"></span> 4.0 - 5.0 (Light)</div>
+                    <div class="legend-item"><span class="legend-color" style="background:#FF9800"></span> 5.0 - 6.0 (Moderate)</div>
+                    <div class="legend-item"><span class="legend-color" style="background:#F44336"></span> 6.0 - 7.0 (Strong)</div>
+                    <div class="legend-item"><span class="legend-color" style="background:#9C27B0"></span> > 7.0 (Major)</div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Data provided by the <a href="https://earthquake.usgs.gov/" target="_blank" style="color: #4fc3f7;">USGS Earthquake Hazards Program</a></p>
+            <p>Created for geography students and seismic research</p>
+        </footer>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+    
+   
+</body>
+</html>
